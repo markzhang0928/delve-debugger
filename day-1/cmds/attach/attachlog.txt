@@ -1,0 +1,37 @@
+(dlv) funcs ^main.*
+main.main
+main.setupHandlers
+main.setupHandlers.func1
+main.startServer
+(dlv) args
+(dlv) continue
+received SIGINT, stopping process (will not forward signal)
+Stopped at: 0x18933506c
+=>   1:	no source available
+(dlv) break main.setupHandlers.func1
+Breakpoint 1 set at 0x100516d3c for main.setupHandlers.func1() ./main.go:16
+(dlv) continue
+> main.setupHandlers.func1() ./main.go:16 (hits goroutine(33):1 total:1) (PC: 0x100516d3c)
+Warning: debugging optimized function
+Warning: listing may not match stale executable
+    11:		setupHandlers()
+    12:		startServer()
+    13:	}
+    14:	
+    15:	func setupHandlers() {
+=>  16:		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+    17:			_, err := fmt.Fprintf(w, "Hello, %q\n", html.EscapeString(r.URL.Path))
+    18:			if err != nil {
+    19:				panic(err)
+    20:			}
+    21:		})
+(dlv) args
+w = net/http.ResponseWriter(*net/http.response) 0xbeef000000000008
+r = ("*net/http.Request")(0x1400019a000)
+(dlv) locals
+(no locals)
+(dlv) continue
+received SIGINT, stopping process (will not forward signal)
+Stopped at: 0x18933506c
+=>   1:	no source available
+(dlv) exit
